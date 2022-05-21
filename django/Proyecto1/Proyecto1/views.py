@@ -1,5 +1,6 @@
 from django.http import HttpResponse
 from django.template import Template, Context
+from django.template import loader
 import datetime
 
 def saludo(request):
@@ -25,14 +26,15 @@ def primera_template(self):
 
   diccionario = {"nombre": nombre, "apellido": apellido, "creation_date": datetime.datetime.now(), "lista_notas": lista_notas}
 
-  html = open('/Users/octaviolafourcade/Documents/PYTHON/django/Proyecto1/Proyecto1/plantillas/template1.html')
-  plantilla = Template(html.read()) #Se carga en memoria nuestro documento, template1   
-    ##OJO importar template y contex, con: from django.template import Template, Context
+  # html = open('/Users/octaviolafourcade/Documents/PYTHON/django/Proyecto1/Proyecto1/plantillas/template1.html')
+  # plantilla = Template(html.read()) #Se carga en memoria nuestro documento, template1   
+  #   ##OJO importar template y contex, con: from django.template import Template, Context
 
-  html.close() #cerramos el archivo
+  # html.close() #cerramos el archivo
 
-  miContexto = Context(diccionario) #EN este caso no hay nada ya que no hay parametros, IGUAL hay que crearlo
+  # miContexto = Context(diccionario) #EN este caso no hay nada ya que no hay parametros, IGUAL hay que crearlo
 
-  documento = plantilla.render(miContexto) #Aca renderizamos la plantilla en documento
+  plantilla = loader.get_template('template1.html')
+  documento = plantilla.render(diccionario) #Aca renderizamos la plantilla en documento
 
   return HttpResponse(documento)
