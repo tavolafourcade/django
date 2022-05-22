@@ -1,5 +1,5 @@
 from django.http import HttpResponse
-from django.template import Template, Context
+from django.template import Template, Context, loader
 
 def first_template(self):
 
@@ -8,13 +8,8 @@ def first_template(self):
 
   dictionary = {'name': name, 'last_name': last_name}
 
-  html_path = open('/Users/octaviolafourcade/Documents/PYTHON/django/hello_world/hello_world/templates/first_template.html')
+  template = loader.get_template('first_template.html')
 
-  template = Template(html_path.read())
-  html_path.close()
-
-  context = Context(dictionary)
-
-  document = template.render(context)
+  document = template.render(dictionary)
 
   return HttpResponse(document)
