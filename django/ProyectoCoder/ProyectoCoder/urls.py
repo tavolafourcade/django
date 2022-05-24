@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.urls import path
-from CodingApp.views import course
+from AppCoder.views import curso
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('course/', course)
+    path('curso/', curso)
 ]

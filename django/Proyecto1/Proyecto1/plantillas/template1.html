@@ -7,19 +7,15 @@
   <title>Document</title>
 </head>
 <body>
-  Mi primera plantilla
-  <p style="color: red">Mi nombre es {{nombre}}</p>
-  <p style="color: blue">Mi apellido es {{apellido}}</p>
-  <p>{{creation_date}}</p>
-
-  <h2>Notas de la universidad</h2>
-  <p>
-    {% for i in lista_notas%}
-      {%if i < 4%}
-        <p style="color: red">NOTA MALA: {{i}}</p>
-      {%else%}<p style="color: blue">NOTA BUENA: {{i}}</p>
-      {% endif %}
-    {% endfor %}
-  </p>
+  <h1>Vamos a empezar con nuestro primer Template</h1>
+  <p>Mi nombre es {{nombre}}</p>
+  <p>Mi apellido es {{apellido}}</p>
+  {% for i in listaDeNotas%}
+    {%if i < 4 %}
+      <p style="color:red">Nota mala: {{i}}</p>
+    {%else%}
+      <p style="color:blue">Nota buena: {{i}}</p>
+    {%endif%}
+  {% endfor %}
 </body>
 </html>
