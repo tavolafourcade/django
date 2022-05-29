@@ -14,6 +14,18 @@ def profesores(self):
   documento = f"Página de profesores"
   return HttpResponse(documento)
 
+def cursos(self):
+  documento = f"Página de cursos"
+  return HttpResponse(documento)
+
+def estudiantes(self):
+  documento = f"Página de estudiantes"
+  return HttpResponse(documento)
+
+def entregables(self):
+  documento = f"Página de entregables"
+  return HttpResponse(documento)
+
 def mi_plantilla(self):
   plantilla = loader.get_template('plantilla.html')
   documento = plantilla.render()
