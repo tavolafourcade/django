@@ -11,18 +11,18 @@ def curso(self):
   return HttpResponse(documento)
 
 def profesores(request):
-  return render(request, 'profesores.html')
+  return render(request, 'AppCoder/profesores.html')
 
 def cursos(request):
-  return render(request, 'cursos.html')
+  return render(request, 'AppCoder/cursos.html')
 
 def estudiantes(request):
-  return render(request, 'estudiantes.html')
+  return render(request, 'AppCoder/estudiantes.html')
 
 def entregables(request):
-  return render(request, 'entregables.html')
+  return render(request, 'AppCoder/entregables.html')
 
 def mi_plantilla(self):
-  plantilla = loader.get_template('plantilla.html')
+  plantilla = loader.get_template('AppCoder/inicio.html')
   documento = plantilla.render()
   return HttpResponse(documento)
