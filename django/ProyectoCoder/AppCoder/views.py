@@ -10,19 +10,11 @@ def curso(self):
   documento = f"Curso: {curso.nombre} - Camada: {curso.camada}"
   return HttpResponse(documento)
 
-def profesores(request):
-  return render(request, 'AppCoder/profesores.html')
+def profesores(self):
+  documento = f"Página de profesores"
+  return HttpResponse(documento)
 
-def cursos(request):
-  return render(request, 'AppCoder/cursos.html')
-
-def estudiantes(request):
-  return render(request, 'AppCoder/estudiantes.html')
-
-def entregables(request):
-  return render(request, 'AppCoder/entregables.html')
-
-def inicio(self):
-  plantilla = loader.get_template('AppCoder/inicio.html')
+def mi_plantilla(self):
+  plantilla = loader.get_template('plantilla.html')
   documento = plantilla.render()
   return HttpResponse(documento)
