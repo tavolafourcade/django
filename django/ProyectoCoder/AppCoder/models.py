@@ -18,6 +18,9 @@ class Profesor(models.Model):
   email = models.EmailField()
   profesion = models.CharField(max_length=30)
 
+  def __str__(self) -> str:
+    return self.nombre+" "+str(self.profesion)
+
 class Entregable(models.Model):
   nombre = models.CharField(max_length=30)
   fechaDeEntrega = models.DateField()
