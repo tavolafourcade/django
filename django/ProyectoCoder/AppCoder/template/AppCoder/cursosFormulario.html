@@ -4,7 +4,7 @@
 <h3>Cursos!</h3>
 {% endblock %}
 {% block contenidoQueCambia %}
-<form action="{% url 'cursosFormulario' %}" method="POST">
+<form action="{% url 'cursosFormulario' %}" method="POST">{% csrf_token %}
   <p>Curso: <input type="text" name="curso"></p>
   <p>Camada: <input type="number" name="camada"></p>
 
