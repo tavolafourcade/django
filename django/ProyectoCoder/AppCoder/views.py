@@ -22,6 +22,9 @@ def estudiantes(request):
 def entregables(request):
   return render(request, 'AppCoder/entregables.html')
 
+def cursosFormulario(request):
+  return render(request, 'AppCoder/cursosFormulario.html')
+
 def inicio(self):
   plantilla = loader.get_template('AppCoder/inicio.html')
   documento = plantilla.render()
