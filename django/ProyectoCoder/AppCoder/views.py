@@ -41,3 +41,10 @@ def inicio(self):
   plantilla = loader.get_template('AppCoder/inicio.html')
   documento = plantilla.render()
   return HttpResponse(documento)
+
+def busquedaComision(request):
+  return render(request, 'AppCoder/busquedaComision.html')
+
+def buscar(request):
+  respuesta = f"Estoy buscando la comision {request.GET['camada']}"
+  return HttpResponse(respuesta)
