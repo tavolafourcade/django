@@ -46,5 +46,12 @@ def busquedaComision(request):
   return render(request, 'AppCoder/busquedaComision.html')
 
 def buscar(request):
-  respuesta = f"Estoy buscando la comision {request.GET['camada']}"
-  return HttpResponse(respuesta)
+  if request.GET['camada']:
+    camada = request.GET['camada']
+    # Del modelo Curso filtrame los cursos que tengan como camada la variable camada
+    cursos = Curso.objects.filter(camada=camada)
+    # Quiero que me renderice cursos y a la vez me mande la lista de los cursos como contexto
+    return render(request, 'AppCoder/resultadosBusqueda.html', {'cursos':cursos, 'camada':camada})
+  else:
+    respuesta = "No se ingresó ninguna comisión"
+    return HttpResponse(respuesta)
