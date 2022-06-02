@@ -1,0 +1,17 @@
+{% extends "appCoder/padre.html" %}
+{% load static %}
+{% block section_name %}
+<h3>Resultado de su búsqueda</h3>
+{% endblock %}
+{% block contenidoQueCambia %}
+<h1> Estamos buscando los cursos de la comision {{camada}}</h1>
+{% if cursos %}
+<ul>
+  {% for curso in cursos %}
+  <li>{{curso.nombre}}</li>
+  <li>{{curso.camada}}</li>
+  <br>
+  {% endfor%}
+</ul>
+{% endif %}
+{% endblock %}
