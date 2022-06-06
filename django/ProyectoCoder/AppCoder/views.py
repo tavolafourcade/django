@@ -1,8 +1,9 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppCoder.models import Curso, Profesor
+from AppCoder.models import Curso, Profesor, Estudiante
 from django.template import loader
 from AppCoder.forms import CursosFormulario, ProfesorFormulario
+from django.views.generic import ListView
 # Create your views here.
 
 def curso(self):
@@ -105,3 +106,9 @@ def editarProfesor(request, nombre):
     miFormulario = ProfesorFormulario(initial={'nombre':profesor.nombre, 'apellido':profesor.apellido, 'email':profesor.email, 'profesion':profesor.profesion})
     contexto = {'miFormulario':miFormulario, 'nombre':nombre}
     return render(request, 'AppCoder/editarProfesor.html', contexto)
+
+#------------------------------------------------------------------------------------------------------------------
+
+class EstudiantesList(ListView):
+  model = Estudiante
+  template_name = 'AppCoder/estudiantes.html'
