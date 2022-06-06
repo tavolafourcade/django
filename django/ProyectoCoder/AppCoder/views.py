@@ -76,3 +76,8 @@ def buscar(request):
   else:
     respuesta = "No se ha ingresado ninguna comisión" 
   return HttpResponse(respuesta)
+
+def leerProfesores(request):
+  profesores = Profesor.objects.all()
+  contexto = {'profesores':profesores}
+  return render(request, 'appCoder/profesores.html', {'profesores':profesores})

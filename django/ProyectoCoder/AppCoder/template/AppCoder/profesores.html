@@ -4,5 +4,8 @@
 <h3>Profesores</h3>
 {% endblock %}
 {% block contenidoQueCambia %}
-<h3>Página de profesores</h3>
+<h3>Listado de profesores</h3>
+{% for profesor in profesores %}
+<li>{{profesor}}</li>
+{% endfor %}
 {% endblock %}
