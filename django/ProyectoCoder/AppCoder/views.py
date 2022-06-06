@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppCoder.models import Curso
+from AppCoder.models import Curso, Profesor
 from django.template import loader
 from AppCoder.forms import CursosFormulario
 # Create your views here.
@@ -55,3 +55,8 @@ def buscar(request):
   else:
     respuesta = "No se ingresó ninguna comisión"
     return HttpResponse(respuesta)
+
+def leerProfesores(request):
+  profesores = Profesor.objects.all() # Traigo todos los profesores de la base de datos
+  contexto = {'profesores':profesores}
+  return render(request, 'AppCoder/profesores.html', contexto)

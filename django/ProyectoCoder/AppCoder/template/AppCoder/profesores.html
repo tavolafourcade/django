@@ -2,4 +2,8 @@
 {% load static %}
 {% block contenidoQueCambia %}
 <h1>Esta es la sección de PROFESORES</h1>
+<h3>Listado de profes</h3>
+{% for profesor in profesores %}
+<li>{{profesor}}</li>
+{% endfor %}
 {% endblock %}
