@@ -3,7 +3,9 @@ from django.shortcuts import render
 from AppCoder.models import Curso, Profesor, Estudiante
 from django.template import loader
 from AppCoder.forms import CursosFormulario, ProfesorFormulario
-from django.views.generic import ListView, DetailView
+from django.views.generic import ListView, DetailView, CreateView
+from django.urls import reverse_lazy
+
 # Create your views here.
 
 def curso(self):
@@ -116,3 +118,8 @@ class EstudiantesList(ListView):
 class EstudianteDetalle(DetailView):
   model = Estudiante
   template_name = 'AppCoder/estudianteDetalle.html'
+
+class EstudianteCreacion(CreateView):
+  model = Estudiante
+  success_url = reverse_lazy('estudiantes') # Redirecciono a la vista de estudiantes luego de crear un estudiante
+  fields = ['nombre', 'apellido', 'email']
