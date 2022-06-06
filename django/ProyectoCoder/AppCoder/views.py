@@ -3,7 +3,7 @@ from django.shortcuts import render
 from AppCoder.models import Curso, Profesor, Estudiante
 from django.template import loader
 from AppCoder.forms import CursosFormulario, ProfesorFormulario
-from django.views.generic import ListView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 # Create your views here.
@@ -128,3 +128,7 @@ class EstudianteEdicion(UpdateView):
   model = Estudiante
   success_url = reverse_lazy('estudiantes')
   fields = ['nombre', 'apellido', 'email']
+
+class EstudianteEliminacion(DeleteView):
+  model = Estudiante
+  success_url = reverse_lazy('estudiantes')
