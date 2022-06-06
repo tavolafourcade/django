@@ -3,7 +3,7 @@ from django.shortcuts import render
 from AppCoder.models import Curso, Profesor, Estudiante
 from django.template import loader
 from AppCoder.forms import CursosFormulario, ProfesorFormulario
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 # Create your views here.
 
 def curso(self):
@@ -112,3 +112,7 @@ def editarProfesor(request, nombre):
 class EstudiantesList(ListView):
   model = Estudiante
   template_name = 'AppCoder/estudiantes.html'
+
+class EstudianteDetalle(DetailView):
+  model = Estudiante
+  template_name = 'AppCoder/estudianteDetalle.html'
