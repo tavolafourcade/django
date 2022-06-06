@@ -85,3 +85,10 @@ def profesorFormulario(request):
     miFormulario = ProfesorFormulario()
   return render(request, 'appCoder/profesorFormulario.html', {'miFormulario':miFormulario})
 
+def eliminarProfesor(request, nombre):
+  profesor = Profesor.objects.get(nombre=nombre)
+  profesor.delete()
+
+  profesores = Profesor.objects.all()
+  contexto = {'profesores':profesores}
+  return render(request, 'appCoder/profesores.html', contexto)
