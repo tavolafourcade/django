@@ -5,5 +5,9 @@
 <h3>Listado de profes</h3>
 {% for profesor in profesores %}
 <li>{{profesor}}</li>
+
+<button>
+  <a href="{% url 'eliminarProfesor' profesor.nombre %}">Eliminar</a>
+</button>
 {% endfor %}
 {% endblock %}

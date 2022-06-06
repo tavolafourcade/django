@@ -77,3 +77,11 @@ def leerProfesores(request):
   profesores = Profesor.objects.all() # Traigo todos los profesores de la base de datos
   contexto = {'profesores':profesores}
   return render(request, 'AppCoder/profesores.html', contexto)
+
+def eliminarProfesor(request, nombre):
+  profesor = Profesor.objects.get(nombre=nombre)
+  profesor.delete()
+
+  profesores = Profesor.objects.all()
+  contexto = {'profesores':profesores}
+  return render(request, 'AppCoder/profesores.html', contexto)
