@@ -85,3 +85,23 @@ def eliminarProfesor(request, nombre):
   profesores = Profesor.objects.all()
   contexto = {'profesores':profesores}
   return render(request, 'AppCoder/profesores.html', contexto)
+
+def editarProfesor(request, nombre):
+  profesor = Profesor.objects.get(nombre=nombre) # Obtengo el profesor a modificar
+  if request.method == 'POST':
+    miFormulario = ProfesorFormulario(request.POST) # Creo mi formulario con los datos del profesor
+    if miFormulario.is_valid():
+      informacion = miFormulario.cleaned_data # Esto me trae los datos limpios
+      profesor.nombre = informacion['nombre']
+      profesor.apellido = informacion['apellido']
+      profesor.email = informacion['email']
+      profesor.profesion = informacion['profesion']
+      profesor.save()
+      # Luego muestro la vista de profesores nuevamente
+      profesores = Profesor.objects.all()
+    contexto = {'profesores':profesores}
+    return render(request, 'AppCoder/profesores.html', contexto)
+  else: # Si no es POST, entonces es GET
+    miFormulario = ProfesorFormulario(initial={'nombre':profesor.nombre, 'apellido':profesor.apellido, 'email':profesor.email, 'profesion':profesor.profesion})
+    contexto = {'miFormulario':miFormulario, 'nombre':nombre}
+    return render(request, 'AppCoder/editarProfesor.html', contexto)
