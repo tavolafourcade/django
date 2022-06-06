@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from AppCoder.models import Curso, Profesor
 from django.template import loader
-from AppCoder.forms import CursosFormulario
+from AppCoder.forms import CursosFormulario, ProfesorFormulario
 # Create your views here.
 
 def curso(self):
@@ -41,6 +41,23 @@ def inicio(self):
   plantilla = loader.get_template('AppCoder/inicio.html')
   documento = plantilla.render()
   return HttpResponse(documento)
+
+def profesorFormulario(request):
+  if request.method == 'POST':
+    miFormulario = ProfesorFormulario(request.POST)
+    if miFormulario.is_valid():
+      informacion = miFormulario.cleaned_data
+    nombre = informacion['nombre']
+    apellido = informacion['apellido']
+    email = informacion['email']
+    profesion = informacion['profesion']
+
+    profesor = Profesor(nombre=nombre, apellido=apellido, email=email, profesion=profesion)
+    profesor.save()
+    return render(request, 'AppCoder/inicio.html')
+  else:
+    miFormulario = ProfesorFormulario()
+  return render(request, 'appCoder/profesorFormulario.html', {'miFormulario':miFormulario})
 
 def busquedaComision(request):
   return render(request, 'AppCoder/busquedaComision.html')

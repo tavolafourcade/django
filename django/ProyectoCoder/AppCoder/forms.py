@@ -4,3 +4,9 @@ class CursosFormulario(forms.Form):
   #Especificar los campos
   curso = forms.CharField(max_length=50)
   camada = forms.IntegerField()
+
+class ProfesorFormulario(forms.Form):
+  nombre = forms.CharField(max_length=30)
+  apellido = forms.CharField(max_length=30)
+  email = forms.EmailField()
+  profesion = forms.CharField(max_length=30)
