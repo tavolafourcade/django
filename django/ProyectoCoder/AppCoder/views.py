@@ -113,7 +113,7 @@ def editarProfesor(request, nombre):
 
 class EstudiantesList(ListView):
   model = Estudiante
-  template_name = 'AppCoder/estudiantes.html'
+  template_name = 'AppCoder/estudiante_list.html'
 
 class EstudianteDetalle(DetailView):
   model = Estudiante
