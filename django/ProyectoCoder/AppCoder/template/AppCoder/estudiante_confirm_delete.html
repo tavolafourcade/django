@@ -2,7 +2,8 @@
 {% load static %}
 {% block contenidoQueCambia %}
 <h1>Esta es la sección de ESTUDIANTES</h1>
-{% for estudiante in object_list %} <!-- object_list es una lista de estudiantes -->
-<li>{{estudiante}}</li>
-{% endfor %}
+<form method="POST">{% csrf_token %}
+  <p>Estás seguro de eliminar el estudiante "{{object}}"</p>
+  <input type="submit" value="SI">
+</form>
 {% endblock %}
