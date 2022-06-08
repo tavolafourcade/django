@@ -2,13 +2,14 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from AppCoder.models import Curso, Profesor, Estudiante
 from django.template import loader
-from AppCoder.forms import CursosFormulario, ProfesorFormulario
+from AppCoder.forms import CursosFormulario, ProfesorFormulario, UserRegistrationForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 # Login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
+
 
 # Create your views here.
 
@@ -160,7 +161,7 @@ def login_request(request):
 
 def registro(request):
   if request.method == 'POST': # Si es POST, entonces es un formulario que viene lleno
-    form = UserCreationForm(request.POST)
+    form = UserRegistrationForm(request.POST)
     if form.is_valid():
       username = form.cleaned_data['username']
       form.save()
@@ -168,5 +169,5 @@ def registro(request):
     else:
       return render(request, 'AppCoder/inicio.html', {'mensaje': 'Error, no se pudo crear el usuario'})
   else:
-    form = UserCreationForm()
+    form = UserRegistrationForm()
     return render(request, 'AppCoder/registro.html', {'form': form})

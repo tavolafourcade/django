@@ -1,4 +1,6 @@
 from django import forms
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 
 class CursosFormulario(forms.Form):
   #Especificar los campos
@@ -10,3 +12,12 @@ class ProfesorFormulario(forms.Form):
   apellido = forms.CharField(max_length=30)
   email = forms.EmailField()
   profesion = forms.CharField(max_length=30)
+ 
+class UserRegistrationForm(UserCreationForm):
+  email = forms.EmailField(required=True)
+  password1 = forms.CharField(label="Contraseña", widget=forms.PasswordInput)
+  password2 = forms.CharField(label="Confirmar contraseña", widget=forms.PasswordInput)
+  class Meta: #Esto es para que el formulario sepa que campos tiene que mostrar
+    model = User
+    fields = ['username', 'email', 'password1', 'password2']
+    help_texts={k:"" for k in fields} #Esto es para que el formulario no muestre los mensajes de ayuda
