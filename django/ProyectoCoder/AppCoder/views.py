@@ -7,7 +7,7 @@ from django.views.generic import ListView, DetailView, CreateView, UpdateView, D
 from django.urls import reverse_lazy
 
 # Login
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 
 # Create your views here.
@@ -157,3 +157,16 @@ def login_request(request):
   else:
     form = AuthenticationForm() # Creo un formulario vacío si vengo por GET
     return render(request, 'AppCoder/login.html', {'form':form})
+
+def registro(request):
+  if request.method == 'POST': # Si es POST, entonces es un formulario que viene lleno
+    form = UserCreationForm(request.POST)
+    if form.is_valid():
+      username = form.cleaned_data['username']
+      form.save()
+      return render(request, 'AppCoder/inicio.html', {'mensaje': f'Usuario {username} creado correctamente'})
+    else:
+      return render(request, 'AppCoder/inicio.html', {'mensaje': 'Error, no se pudo crear el usuario'})
+  else:
+    form = UserCreationForm()
+    return render(request, 'AppCoder/registro.html', {'form': form})
