@@ -6,6 +6,10 @@ from AppCoder.forms import CursosFormulario, ProfesorFormulario
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
+# Login
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate, logout
+
 # Create your views here.
 
 def curso(self):
@@ -132,3 +136,24 @@ class EstudianteEdicion(UpdateView):
 class EstudianteEliminacion(DeleteView):
   model = Estudiante
   success_url = reverse_lazy('estudiante_listar')
+
+#------------------------------------------------------------------------------------------------------------------
+
+def login_request(request):
+  if request.method == 'POST':
+    form = AuthenticationForm(request, request.POST)
+    if form.is_valid():
+      usuario = form.cleaned_data.get('username')
+      clave = form.cleaned_data.get('password')
+      # Autenticación de usuario
+      user = authenticate(username=usuario, password=clave) # Si este usuario existe me lo trae
+      if user is not None:
+        login(request,user) # Si existe, lo loguea
+        return render(request, 'AppCoder/inicio.html', {'mensaje': f'Bienvenido {usuario}'})
+      else:
+        return render(request, 'AppCoder/inicio.html', {'mensaje': 'Error, datos incorrectos'})
+    else:
+      return render(request,'AppCoder/inicio.html', {'mensaje': 'Error, formulario erróneo'})
+  else:
+    form = AuthenticationForm() # Creo un formulario vacío si vengo por GET
+    return render(request, 'AppCoder/login.html', {'form':form})

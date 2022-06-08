@@ -1,5 +1,5 @@
 from django.urls import path
-from AppCoder.views import inicio, profesores, curso, cursos, estudiantes, entregables, cursosFormulario, busquedaComision, buscar, profesorFormulario, leerProfesores, eliminarProfesor, editarProfesor, EstudiantesList, EstudianteDetalle, EstudianteCreacion, EstudianteEdicion, EstudianteEliminacion
+from AppCoder.views import inicio, profesores, curso, cursos, estudiantes, entregables, cursosFormulario, busquedaComision, buscar, profesorFormulario, leerProfesores, eliminarProfesor, editarProfesor, EstudiantesList, EstudianteDetalle, EstudianteCreacion, EstudianteEdicion, EstudianteEliminacion, login_request
 # from AppCoder.views import curso, profesores
 
 urlpatterns = [
@@ -21,5 +21,7 @@ urlpatterns = [
   path('estudiante/nuevo/', EstudianteCreacion.as_view(), name='estudiante_crear'),
   path('estudiante/editar/<pk>', EstudianteEdicion.as_view(), name='estudiante_editar'),
   path('estudiante/borrar/<pk>', EstudianteEliminacion.as_view(), name='estudiante_borrar'),
+
+  path('login', login_request, name = "Login")
 
 ]
