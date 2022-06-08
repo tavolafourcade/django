@@ -10,7 +10,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
 from django.contrib.auth.mixins import LoginRequiredMixin
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
@@ -87,6 +87,7 @@ def leerProfesores(request):
   contexto = {'profesores':profesores}
   return render(request, 'AppCoder/profesores.html', contexto)
 
+@login_required
 def eliminarProfesor(request, nombre):
   profesor = Profesor.objects.get(nombre=nombre)
   profesor.delete()
