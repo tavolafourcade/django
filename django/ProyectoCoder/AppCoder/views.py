@@ -9,6 +9,7 @@ from django.urls import reverse_lazy
 # Login
 from django.contrib.auth.forms import AuthenticationForm, UserCreationForm
 from django.contrib.auth import login, authenticate, logout
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 # Create your views here.
@@ -116,7 +117,7 @@ def editarProfesor(request, nombre):
 
 #------------------------------------------------------------------------------------------------------------------
 
-class EstudiantesList(ListView):
+class EstudiantesList(LoginRequiredMixin, ListView):
   model = Estudiante
   template_name = 'AppCoder/estudiante_list.html'
 
