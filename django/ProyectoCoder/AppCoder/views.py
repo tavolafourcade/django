@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from AppCoder.models import Curso, Profesor, Estudiante
+from AppCoder.models import Curso, Profesor, Estudiante, Avatar
 from django.template import loader
 from AppCoder.forms import CursosFormulario, ProfesorFormulario, UserRegistrationForm, UserEditForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
@@ -46,10 +46,13 @@ def cursosFormulario(request):
     miFormulario = CursosFormulario() #Creo mi formulario vacío
   return render(request, 'AppCoder/cursosFormulario.html', {'miFormulario':miFormulario})
 
-def inicio(self):
-  plantilla = loader.get_template('AppCoder/inicio.html')
-  documento = plantilla.render()
-  return HttpResponse(documento)
+@login_required
+def inicio(request):
+  avatars = Avatar.objects.filter(user=request.user.id)
+  return render(request, 'appCoder/inicio.html', {'url': avatars[0].avatar.url})
+  # plantilla = loader.get_template('AppCoder/inicio.html')
+  # documento = plantilla.render()
+  # return HttpResponse(documento)
 
 def profesorFormulario(request):
   if request.method == 'POST':
