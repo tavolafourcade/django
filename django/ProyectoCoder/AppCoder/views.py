@@ -157,9 +157,9 @@ def login_request(request):
         return render(request, 'AppCoder/inicio.html', {'mensaje': 'Error, datos incorrectos'})
     else:
       return render(request,'AppCoder/inicio.html', {'mensaje': 'Error, formulario erróneo'})
-  else:
-    form = AuthenticationForm() # Creo un formulario vacío si vengo por GET
-    return render(request, 'AppCoder/login.html', {'form':form})
+  
+  form = AuthenticationForm() # Creo un formulario vacío si vengo por GET
+  return render(request, 'AppCoder/login.html', {'form':form})
 
 def registro(request):
   if request.method == 'POST': # Si es POST, entonces es un formulario que viene lleno
