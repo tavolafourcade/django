@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from AppCoder.models import Curso, Profesor, Estudiante
 from django.template import loader
-from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegistrationForm
+from AppCoder.forms import CursoFormulario, ProfesorFormulario, UserRegistrationForm, UserEditForm
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
@@ -183,3 +183,21 @@ def register_request(request):
   else:
     form = UserRegistrationForm()
     return render(request, 'AppCoder/register.html', {'form':form})
+
+@login_required
+def editarPerfil(request):
+  # Viene del modelo de Django para usuarios
+  usuario = request.user
+
+  if request.method == 'POST':
+    formulario = UserEditForm(request.POST, instance=usuario)
+    if formulario.is_valid():
+      informacion = formulario.cleaned_data
+      usuario.email = informacion['email']
+      usuario.password1 = informacion['password1']
+      usuario.password2 = informacion['password2']
+      usuario.save()
+      return render(request, 'AppCoder/inicio.html', {'mensaje': 'Datos cambiado exitosamente'})
+  else:
+    formulario = UserEditForm(instance=usuario)
+  return render(request, 'AppCoder/editarPerfil.html', {'formulario':formulario, 'usuario':usuario.username})
